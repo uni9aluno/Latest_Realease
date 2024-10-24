@@ -118,36 +118,40 @@ select {
         width: max-content;
     } 
     div#nomeFalecidoJapones-container {
-        top: 245px !important;
-        left: 927.844px !important;
+        top: 213px !important;
+        left: 913.844px !important;
         font-size: 25px;
         font-weight: 700;
         width: 75px;
+        writing-mode: vertical-rl;
     }
     div#relacao-container {
         top: 155px !important;
-        left: 927.844px !important;
-        font-size: 25px;
+        left: 911.844px !important;
+        font-size: 27px;
         font-weight: 700;
         width: 75px;
+        writing-mode: vertical-rl;
     }
     div#missa-container {
-        top: 205px !important;
-        left: 829px !important;
+        top: 155px !important;
+        left: 773px !important;
         font-size: 32px;
         font-weight: 700;
         width: 163px;
+        writing-mode: vertical-rl;
     }
-    .text-container {
-        transform: rotate(90deg) !important;
-    }
+   
     div#nomeFamiliaJapones-container {
-        left: 836px !important;
+        left: 774px !important;
         top: 536px !important;
         font-size: 25px;
         font-weight: 700;
         width: 164px;
+        writing-mode: vertical-rl;
     }
+
+    @media screen and (min-width: 768px) and (max-width: 1366px) {
 
  }
 
