@@ -36,15 +36,7 @@ nomeFamiliaJapones.addEventListener('input', updatePreview);
 periodo.addEventListener('change', updatePreview);
 
 // Função de arrastar e obter coordenadas
-$(function() {
-    $(".text-container").draggable({
-        containment: "#preview",
-        drag: function(event, ui) {
-            const containerId = event.target.id;
-            $('#coordenadas').text(`${containerId} - X: ${ui.position.left.toFixed(2)}, Y: ${ui.position.top.toFixed(2)}`);
-        }
-    });
-});
+ 
 
 
 /// Função para baixar o PDF

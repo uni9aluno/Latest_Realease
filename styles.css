@@ -84,20 +84,72 @@ select {
     width: 100%;
 }
 
-#texto-fixo {
-    position: absolute;
-    top: 457.5px;
-    left: 601.188px;
-    transform: translate(-50%, -50%);
-    color: #000;
-    cursor: move;
-    padding: 2px;
-    transform-origin: center;
-    white-space: pre-line;
-    font-family: 'Great Vibes';
-    font-size: 34px;
-    width: max-content;
+@media screen and  (max-width: 1280px) {
+
+    div#texto-fixo {
+        position: absolute;
+        top: 457.5px;
+        left: 601.188px;
+        transform: translate(-50%, -50%);
+        color: #000;
+        cursor: move;
+        padding: 2px;
+        transform-origin: center;
+        white-space: pre-line;
+        font-family: 'Great Vibes';
+        font-size: 34px;
+        width: max-content;
+    }
 }
+
+@media screen and (min-width: 1367px) {
+    div#texto-fixo {
+        position: absolute;
+        top: 699.5px;
+        left: 933.188px;
+        transform: translate(-50%, -50%);
+        color: #000;
+        cursor: move;
+        padding: 2px;
+        transform-origin: center;
+        white-space: pre-line;
+        font-family: 'Great Vibes';
+        font-size: 34px;
+        width: max-content;
+    } 
+    div#nomeFalecidoJapones-container {
+        top: 245px !important;
+        left: 927.844px !important;
+        font-size: 25px;
+        font-weight: 700;
+        width: 75px;
+    }
+    div#relacao-container {
+        top: 155px !important;
+        left: 927.844px !important;
+        font-size: 25px;
+        font-weight: 700;
+        width: 75px;
+    }
+    div#missa-container {
+        top: 205px !important;
+        left: 829px !important;
+        font-size: 32px;
+        font-weight: 700;
+        width: 163px;
+    }
+    .text-container {
+        transform: rotate(90deg) !important;
+    }
+    div#nomeFamiliaJapones-container {
+        left: 836px !important;
+        top: 536px !important;
+        font-size: 25px;
+        font-weight: 700;
+        width: 164px;
+    }
+
+ }
 
 #coordenadas {
     margin-top: 10px;
