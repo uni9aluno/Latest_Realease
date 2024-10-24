@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pré-visualização e Gerar PDF</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>        
+        <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>        
+        <link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Great+Vibes&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Noshigami Designer - Tenman-ya</h1>
+    
+            <div id="form-container">
+                <input type="text" id="nomeFalecido" placeholder="Nome do Falecido" />
+                <select id="periodonumeral">
+                    <option value="">Missa Numeral</option>
+                    <option value="7º dia">7º dia</option> 
+                    <option value="14º dia">14º dia</option>
+                    <option value="21º dia">21º dia</option>
+                    <option value="28º dia">28º dia</option>
+                    <option value="35º dia">35º dia</option>
+                    <option value="42º dia">42º dia</option>
+                    <option value="49º dia">49º dia</option>
+                    <option value="100º dia">100º dia</option>
+                    <option value="1 ano">1 ano</option>
+                    <option value="3 anos">3 anos</option>
+                    <option value="7 anos">7 anos</option>
+                    <option value="13 anos">13 anos</option>
+                    <option value="17 anos">17 anos</option>
+                    <option value="23 anos">23 anos</option>
+                    <option value="27 anos">27 anos</option>
+                    <option value="33 anos">33 anos</option>
+                    <option value="50 anos">50 anos</option>
+                </select>
+                <select id="periodo">
+                    <option value="">Missa de</option>
+                    <option value="初七日">7° ano : 初七日</option>
+                    <option value="二七日">14: 二七日</option>
+                    <option value="三七日">21: 三七日</option>
+                    <option value="四七日">28: 四七日</option>
+                    <option value="五七日">35: 五七日</option>
+                    <option value="六七日">42: 六七日</option>
+                    <option value="四十九日">49: 四十九日</option>
+                    <option value="百箇日">100: 百箇日</option>
+                    <option value="一周忌">1 ano: 一周忌</option>
+                    <option value="三回忌">3 anos: 三回忌</option>
+                    <option value="七回忌">7 anos: 七回忌</option>
+                    <option value="十三回忌">13 anos: 十三回忌</option>
+                    <option value="十七回忌">17 anos: 十七回忌</option>
+                    <option value="二十三回忌">23 anos: 二十三回忌</option>
+                    <option value="二十七回忌">27 anos: 二十七回忌</option>
+                    <option value="三十三回忌">33 anos: 三十三回忌</option>
+                    <option value="五十回忌">50 anos: 五十回忌</option>
+                </select>
+                <select id="relacao">
+                    <option value="">Parentesco</option>
+                    <option value="ご父">pai - ご父</option>
+                    <option value="お母">mãe - お母</option>
+                    <option value="ご祖父">avô - ご祖父</option>
+                    <option value="ご祖母">avó - ご祖母</option>
+                    <option value="ご妻">esposa - ご妻</option>
+                    <option value="ご主人">marido - ご主人</option>
+                    <option value="ご岳父">sogro - ご岳父</option>
+                    <option value="ご岳母">sogra - ご岳母</option>
+                    <option value="ご嫁">nora - ご嫁</option>
+                    <option value="ご婿">genro - ご婿</option>
+                    <option value="ご長男">filho - ご長男</option>
+                    <option value="ご長女">filha - ご長女</option>
+                    <option value="ご兄">irmão - ご兄</option>
+                    <option value="ご姉">irmã - ご姉</option>
+                </select>
+                <input type="text" id="nomeFamilia" placeholder="Nome da Família" />
+                <input type="text" id="nomeFamiliaJapones" placeholder="Nome da Família em Japonês" />
+                <input type="text" id="nomeFalecidoJapones" placeholder="Nome do Falecido em Japonês" />
+            </div>
+    
+            <div class="button-group">
+                <button id="download-pdf">Baixar PDF</button>
+                <button id="gerar-docx">Gerar Docx</button>
+                <button id="ocultar-traducao">Ocultar Tradução</button>
+            </div>
+            
+            <div id="preview">
+                <img id="imagemPreview" src="https://i.ibb.co/7XXLP89/Noshigami-Okaeshi-LOGO-NOVO-36-5cm-x-16cm.jpg" alt="Imagem Pré-visualização" />
+                
+                <!-- Texto-Fixo -->
+                <div id="texto-fixo">
+                    Missa de <span id="periodoPreviewNumeral"></span> de <span id="nomeFalecidoPreview"></span>.
+                    A Família <span id="nomeFamiliaPreview"></span> agradece as condolências recebidas
+                </div>
+                
+                <!-- Missa -->
+                <div id="missa-container" class="text-container">
+                     <span id="periodoPreview"></span> <span id="periodoPreviewNumeral"></span>
+                </div>
+            
+                <!-- Nome do Falecido -->
+                <div id="nomeFalecido-container" class="text-container">
+                     <span id="nomeFalecidoPreview"></span>
+                </div>
+            
+                <!-- Nome do Falecido em Japonês -->
+                <div id="nomeFalecidoJapones-container" class="text-container">
+                     <span id="nomeFalecidoJaponesPreview"></span>
+                </div>
+            
+                <!-- Relação (Parentesco) -->
+                <div id="relacao-container" class="text-container">
+                     <span id="relacaoPreview"></span>
+                </div>
+            
+                <!-- Nome da Família -->
+                <div id="nomeFamilia-container" class="text-container">
+                     <span id="nomeFamiliaPreview"></span>
+                </div>
+            
+                <!-- Nome da Família em Japonês -->
+                <div id="nomeFamiliaJapones-container" class="text-container">
+                     <span id="nomeFamiliaJaponesPreview"></span>
+                </div>
+            </div>
+            
+            <div id="coordenadas">X: 0, Y: 0</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

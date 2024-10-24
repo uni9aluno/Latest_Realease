@@ -1,0 +1,261 @@
+aqui esta o codigo html e java atuais 
+
+const nomeFalecidoJapones = document.getElementById('nomeFalecidoJapones');
+const periodo = document.getElementById('periodo');
+const periodonumeral = document.getElementById('periodonumeral');
+const relacao = document.getElementById('relacao');
+const nomeFalecido = document.getElementById('nomeFalecido');
+const nomeFamilia = document.getElementById('nomeFamilia');
+const nomeFamiliaJapones = document.getElementById('nomeFamiliaJapones');
+const previewTexto = document.getElementById('texto-fixo');
+const coordenadas = document.getElementById('coordenadas');
+
+// Elementos da pré-visualização
+const periodoPreviewNumeral = document.getElementById('periodoPreviewNumeral');
+const nomeFalecidoPreview = document.getElementById('nomeFalecidoPreview');
+const nomeFamiliaPreview = document.getElementById('nomeFamiliaPreview');
+const relacaoPreview = document.getElementById('relacaoPreview');
+const periodoPreview = document.getElementById('periodoPreview');
+const nomeFalecidoJaponesPreview = document.getElementById('nomeFalecidoJaponesPreview');
+const nomeFamiliaJaponesPreview = document.getElementById('nomeFamiliaJaponesPreview');
+
+// Atualiza o texto da pré-visualização em tempo real
+function updatePreview() {
+    periodoPreviewNumeral.textContent = periodonumeral.value; 
+    nomeFalecidoPreview.textContent = nomeFalecido.value;
+    nomeFamiliaPreview.textContent = nomeFamilia.value;
+    relacaoPreview.textContent = relacao.value; 
+    periodoPreview.textContent = periodo.value; 
+    nomeFalecidoJaponesPreview.textContent = nomeFalecidoJapones.value; 
+    nomeFamiliaJaponesPreview.textContent = nomeFamiliaJapones.value; 
+}
+
+// Adiciona ouvintes de evento para atualizar a pré-visualização
+nomeFalecido.addEventListener('input', updatePreview);
+nomeFalecidoJapones.addEventListener('input', updatePreview);
+periodonumeral.addEventListener('change', updatePreview);
+relacao.addEventListener('change', updatePreview);
+nomeFamilia.addEventListener('input', updatePreview);
+nomeFamiliaJapones.addEventListener('input', updatePreview);
+periodo.addEventListener('change', updatePreview);
+
+// Permite arrastar o texto
+$(function() {
+    $("#texto-fixo").draggable({ 
+        containment: "#updatePreview",
+        drag: function(event, ui) {
+            $('#coordenadas').text(X: ${ui.position.left.toFixed(2)}, Y: ${ui.position.top.toFixed(2)});
+        }
+    });
+});
+
+// Função para baixar o PDF
+document.getElementById('download-pdf').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;
+    const img = new Image();
+    img.src = 'https://i.ibb.co/7XXLP89/Noshigami-Okaeshi-LOGO-NOVO-36-5cm-x-16cm.jpg';
+    
+    img.onload = function() {
+        const imgWidthMM = 365; // Largura da imagem em milímetros
+        const imgHeightMM = 160; // Altura da imagem em milímetros
+        const fontSizeMM = 25 * 0.352778; // Tamanho fixo da fonte em pixels convertido para milímetros
+
+        const doc = new jsPDF('l', 'mm', [imgWidthMM, imgHeightMM]);
+
+        doc.addImage(img, 'PNG', 0, 0, imgWidthMM, imgHeightMM);
+
+        const textoPosition = $('#texto-fixo').position();
+        const textoX = textoPosition.left;
+        const textoY = textoPosition.top;
+
+        // PPI de 133: conversão de pixels para milímetros
+        const pixelToMM = 25.4 / 133; // 1 pixel ≈ 0.19082 mm
+
+        const pdfX = textoX * pixelToMM; // Converte X para milímetros
+        const pdfY = textoY * pixelToMM; // Converte Y para milímetros
+
+        doc.setFontSize(fontSizeMM); // Define o tamanho fixo da fonte no PDF
+        doc.text(previewTexto.textContent, pdfX, pdfY, {
+            angle: 0, // Sem rotação
+            align: "center"
+        });
+
+        doc.save('Noshigami.pdf');
+    };
+});
+
+// Função para gerar o arquivo DOCX
+document.getElementById('gerar-docx').addEventListener('click', function() {
+    const { Document, Packer, Paragraph, TextRun, PageSize } = docx;
+
+    // Definindo largura e altura em pontos (1 ponto = 1/72 de polegada)
+    const largura = 918; // 36,5 cm em pontos 
+    const altura = 381; // 16 cm em pontos 
+
+    const doc = new Document({
+        creator: 'Seu Nome ou Aplicativo',
+        description: 'Documento com tamanho personalizado',
+        sections: [{
+            properties: {
+                pageSize: {
+                  width: { size: largura, type: 'dxa' }, 
+                  height: { size: altura, type: 'dxa' }
+                },
+                page: {
+                    margin: {
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                    },
+                },
+            },
+            children: [
+                new Paragraph({
+                    children: [
+                        new TextRun(Nome do Falecido: ${nomeFalecido.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Nome do Falecido em Japonês: ${nomeFalecidoJapones.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Nome da Família: ${nomeFamilia.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Nome da Família em Japonês: ${nomeFamiliaJapones.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Missa Numeral: ${periodonumeral.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Missa de: ${periodo.value}),
+                        new TextRun({
+                            text: "\n",
+                        }),
+                        new TextRun(Relação: ${relacao.value})
+                    ],
+                }),
+            ],
+        }],
+    });
+
+    Packer.toBlob(doc).then(blob => {
+        console.log(blob);
+        saveAs(blob, "documento.docx"); // Usando FileSaver.js
+        console.log("Document created successfully");
+    }).catch(err => {
+        console.error('Erro ao gerar o arquivo DOCX:', err);
+    });
+});
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pré-visualização e Gerar PDF</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>        
+        <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>        
+        <link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Great+Vibes&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <div class="container">
+        <h1>Pré-visualização e Gerar PDF</h1>
+
+        <div id="form-container">
+            <input type="text" id="nomeFalecido" placeholder="Nome do Falecido" />
+            <select id="periodonumeral">
+                <option value="">Missa Numeral</option>
+                <option value="7">7º dia</option> 
+                <option value="14">14º dia</option>
+                <option value="21">21º dia</option>
+                <option value="28">28º dia</option>
+                <option value="35">35º dia</option>
+                <option value="42">42º dia</option>
+                <option value="49">49º dia</option>
+                <option value="100">100º dia</option>
+                <option value="1 ano">1 ano</option>
+                <option value="3 anos">3 anos</option>
+                <option value="7 anos">7 anos</option>
+                <option value="13 anos">13 anos</option>
+                <option value="17 anos">17 anos</option>
+                <option value="23 anos">23 anos</option>
+                <option value="27 anos">27 anos</option>
+                <option value="33 anos">33 anos</option>
+                <option value="50 anos">50 anos</option>
+            </select>              
+            <select id="periodo">
+                <option value="">Missa de</option>
+                <option value="初七日">7: 初七日</option>
+                <option value="二七日">14: 二七日</option>
+                <option value="三七日">21: 三七日</option>
+                <option value="四七日">28: 四七日</option>
+                <option value="五七日">35: 五七日</option>
+                <option value="六七日">42: 六七日</option>
+                <option value="四十九日">49: 四十九日</option>
+                <option value="百箇日">100: 百箇日</option>
+                <option value="一周忌">1 ano: 一周忌</option>
+                <option value="三回忌">3 anos: 三回忌</option>
+                <option value="七回忌">7 anos: 七回忌</option>
+                <option value="十三回忌">13 anos: 十三回忌</option>
+                <option value="十七回忌">17 anos: 十七回忌</option>
+                <option value="二十三回忌">23 anos: 二十三回忌</option>
+                <option value="二十七回忌">27 anos: 二十七回忌</option>
+                <option value="三十三回忌">33 anos: 三十三回忌</option>
+                <option value="五十回忌">50 anos: 五十回忌</option>
+            </select>
+            <select id="relacao">
+                <option value="">Parentesco</option>
+                <option value="ご父">pai - ご父</option>
+                <option value="お母">mãe - お母</option>
+                <option value="ご祖父">avô - ご祖父</option>
+                <option value="ご祖母">avó - ご祖母</option>
+                <option value="ご妻">esposa - ご妻</option>
+                <option value="ご主人">marido - ご主人</option>
+                <option value="ご岳父">sogro - ご岳父</option>
+                <option value="ご岳母">sogra - ご岳母</option>
+                <option value="ご嫁">nora - ご嫁</option>
+                <option value="ご婿">genro - ご婿</option>
+                <option value="ご長男">filho - ご長男</option>
+                <option value="ご長女">filha - ご長女</option>
+                <option value="ご兄">irmão - ご兄</option>
+                <option value="ご姉">irmã - ご姉</option>
+            </select>
+            <input type="text" id="nomeFamilia" placeholder="Nome da Família" />
+            <input type="text" id="nomeFamiliaJapones" placeholder="Nome da Família em Japonês" />
+            <input type="text" id="nomeFalecidoJapones" placeholder="Nome do Falecido em Japonês" />
+        </div>
+
+        <div class="button-group">
+            <button id="download-pdf">Baixar PDF</button>
+            <button id="gerar-docx">Gerar Docx</button>
+            <button id="ocultar-traducao">Ocultar Tradução</button>
+        </div>
+
+        <div id="preview">
+            <img id="imagemPreview" src="https://i.ibb.co/7XXLP89/Noshigami-Okaeshi-LOGO-NOVO-36-5cm-x-16cm.jpg" alt="Imagem Pré-visualização" />
+            <div id="texto-fixo">
+                Missa de <span id="periodoPreviewNumeral"></span> de <span id="nomeFalecidoPreview"></span>.
+                A Família <span id="nomeFamiliaPreview"></span> agradece as condolências recebidas
+                <span id="relacaoPreview"></span>
+                <span id="periodoPreview"></span>   
+                <span id="nomeFalecidoJaponesPreview"></span>
+                <span id="nomeFamiliaJaponesPreview"></span>
+            </div>
+        </div>
+
+        <div id="coordenadas">X: 0, Y: 0</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
