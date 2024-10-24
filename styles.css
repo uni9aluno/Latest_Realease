@@ -150,9 +150,56 @@ select {
         width: 164px;
         writing-mode: vertical-rl;
     }
+}
 
     @media screen and (min-width: 768px) and (max-width: 1366px) {
-
+        div#texto-fixo {
+            position: absolute;
+            top: 497.5px;
+            left: 643.188px;
+            transform: translate(-50%, -50%);
+            color: #000;
+            cursor: move;
+            padding: 2px;
+            transform-origin: center;
+            white-space: pre-line;
+            font-family: 'Great Vibes';
+            font-size: 34px;
+            width: max-content;
+        } 
+        div#nomeFalecidoJapones-container {
+            top: 213px !important;
+            left: 913.844px !important;
+            font-size: 25px;
+            font-weight: 700;
+            width: 75px;
+            writing-mode: vertical-rl;
+        }
+        div#relacao-container {
+            top: 53px !important;
+            left: 611.844px !important;
+            font-size: 27px;
+            font-weight: 700;
+            width: 75px;
+            writing-mode: vertical-rl;
+        }
+        div#missa-container {
+            top: 100px !important;
+            left: 492px !important;
+            font-size: 32px;
+            font-weight: 700;
+            width: 163px;
+            writing-mode: vertical-rl;
+        }
+       
+        div#nomeFamiliaJapones-container {
+            left: 488px !important;
+            top: 349px !important;
+            font-size: 25px;
+            font-weight: 700;
+            width: 164px;
+            writing-mode: vertical-rl;
+        }
  }
 
 #coordenadas {
@@ -196,4 +243,4 @@ select {
     top: 300px;
     left: 100px;
 }
-
+}
