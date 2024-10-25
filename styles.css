@@ -118,7 +118,7 @@ select {
         width: max-content;
     } 
     div#nomeFalecidoJapones-container {
-        top: 213px !important;
+        top: 241px !important;
         left: 913.844px !important;
         font-size: 25px;
         font-weight: 700;
@@ -168,8 +168,8 @@ select {
             width: max-content;
         } 
         div#nomeFalecidoJapones-container {
-            top: 213px !important;
-            left: 913.844px !important;
+            top: 163px !important;
+            left: 612.844px !important;
             font-size: 25px;
             font-weight: 700;
             width: 75px;
