@@ -14,6 +14,18 @@ const nomeFamiliaPreview = document.getElementById('nomeFamiliaPreview');
 const nomeFamiliaJaponesPreview = document.getElementById('nomeFamiliaJaponesPreview');
 const relacaoPreview = document.getElementById('relacaoPreview');
 const previewTexto = document.getElementById('previewTexto');
+const ocultarTraducaoBtn = document.getElementById('ocultar-traducao');
+const textoFixo = document.getElementById('texto-fixo');
+
+// Adiciona um ouvinte de evento para o botão "Ocultar Tradução"
+ocultarTraducaoBtn.addEventListener('click', function() {
+  // Alterna a visibilidade do texto
+  if (textoFixo.style.display === 'none') {
+    textoFixo.style.display = 'block'; // ou o estilo de exibição original
+  } else {
+    textoFixo.style.display = 'none';
+  }
+});
 
 function updatePreview() {
     // Atualizar cada bloco separadamente
@@ -82,6 +94,7 @@ document.getElementById('download-pdf').addEventListener('click', function() {
         doc.text(`${nomeFalecidoPreview}`, pdfX, pdfY);
         pdfY += 10; // Ajustar a posição Y
         doc.text(`${nomeFamiliaPreview}`, pdfX, pdfY);
+        
 
         // Salva o PDF com o nome desejado
         doc.save('Noshigami.pdf');
