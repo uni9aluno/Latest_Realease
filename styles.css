@@ -7,6 +7,8 @@ body {
     min-height: 100vh;
 }
 
+
+
 body {
     font-family: 'Great Vibes', cursive;
 }
@@ -202,12 +204,6 @@ select {
         }
  }
 
-#coordenadas {
-    margin-top: 10px;
-    font-size: 40px;
-    color: #777;
-}
-
 .text-container {
     position: absolute; /* Para facilitar o posicionamento dinâmico */
     font-family: 'Yuji Syuku', 'Great Vibes', cursive;
@@ -242,4 +238,12 @@ select {
 #nomeFamiliaJapones-container {
     top: 300px;
     left: 100px;
+}
+
+#nomeFalecido {
+  width: 139px;
+}
+
+#nomeFamilia {
+  width: 128px;
 }

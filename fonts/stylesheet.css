@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Great Vibes';
+    src: url('GreatVibes-Regular.eot');
+    src: local('Great Vibes'), local('GreatVibes-Regular'),
+        url('GreatVibes-Regular.eot?#iefix') format('embedded-opentype'),
+        url('GreatVibes-Regular.woff2') format('woff2'),
+        url('GreatVibes-Regular.woff') format('woff'),
+        url('GreatVibes-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
