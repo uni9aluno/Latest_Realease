@@ -89,6 +89,36 @@
     #download-pdf:hover,
     #imprimir-texto:hover {
         background-color: #3e8e41;
+    }    
+    
+    button#tirar-print {
+        background-color: #445ce2;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }    
+    
+    button#tirar-print:hover {
+        background-color: #222dc2;
+    }    
+    
+    button#ocultar-traducao {
+        background-color: #0b7280;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }    
+    
+    button#ocultar-traducao:hover {
+        background-color: #04464e;
     }
     
     #preview {
@@ -120,7 +150,7 @@
             font-family: 'Great Vibes';
             font-size: 34px;
             width: max-content;
-        }   
+        }
     
         div#nomeFalecidoJapones-container {
             top: 120px !important;
@@ -311,6 +341,7 @@
     }
     
     </style>
+
     <body>
         <div class="container">
     
@@ -379,9 +410,8 @@
             </div>
     
             <div class="button-group">
-                <button id="download-pdf">Baixar PDF</button>
+                <button id="tirar-print">Realizar Download</button>
                 <button id="ocultar-traducao">Ocultar Tradução</button>
-                <button id="tirar-print">Tirar Print</button>
             </div>
                       
             
