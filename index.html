@@ -44,19 +44,205 @@
     #form-container {
         display: flex;
         flex-direction: row;
-        gap: 15px;
+        gap: 7px;
         max-width: 400px;
         margin: 20px auto;
         flex-wrap: nowrap;
         justify-content: center;
     }
     
-    input[type="text"],
-    select {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
+    
+    #nomeFalecido {
+        width: 100%;
+        /* Largura total do contêiner */
+        padding: 12px 15px;
+        /* Espaçamento interno */
+        margin: 15px 0;
+        /* Margem entre os campos */
+        border: 2px solid #ccc;
+        /* Borda clara e espessa */
+        border-radius: 8px;
+        /* Cantos arredondados */
+        font-size: 18px;
+        /* Texto maior e mais legível */
+        font-family: 'Arial', sans-serif;
+        /* Tipografia limpa e moderna */
+        background-color: #f9f9f9;
+        /* Fundo claro */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Animação */
+    }
+    
+    /* Efeito de foco no campo nomeFalecido */
+    #nomeFalecido:focus {
+        border-color: #007BFF;
+        /* Azul vibrante ao focar */
+        background-color: #ffffff;
+        /* Fundo branco para destaque */
+        box-shadow: 0 6px 10px rgba(0, 123, 255, 0.2);
+        /* Sombra mais forte */
+        outline: none;
+        /* Remove contorno padrão */
+    }
+    
+    /* Adiciona um placeholder estilizado */
+    #nomeFalecido::placeholder {
+        color: #888;
+        /* Cor do texto do placeholder */
+        font-style: italic;
+        /* Texto em itálico */
+    }
+    
+    #nomeFamilia {
+        width: 100%;
+        /* Largura total do contêiner */
+        padding: 12px 15px;
+        /* Espaçamento interno */
+        margin: 15px 0;
+        /* Margem entre os campos */
+        border: 2px solid #ccc;
+        /* Borda clara e espessa */
+        border-radius: 8px;
+        /* Cantos arredondados */
+        font-size: 18px;
+        /* Texto maior e mais legível */
+        font-family: 'Arial', sans-serif;
+        /* Tipografia limpa e moderna */
+        background-color: #f9f9f9;
+        /* Fundo claro */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Animação */
+        text-align: -webkit-center;
+    }
+    
+    /* Efeito de foco no campo nomeFalecido */
+    #nomeFamilia:focus {
+        border-color: #007BFF;
+        /* Azul vibrante ao focar */
+        background-color: #ffffff;
+        /* Fundo branco para destaque */
+        box-shadow: 0 6px 10px rgba(0, 123, 255, 0.2);
+        /* Sombra mais forte */
+        outline: none;
+        /* Remove contorno padrão */
+        text-align: -webkit-center;
+    }
+    
+    /* Adiciona um placeholder estilizado */
+    #nomeFamilia:placeholder {
+        color: #888;
+        /* Cor do texto do placeholder */
+        font-style: italic;
+        /* Texto em itálico */
+    }
+    
+    #nomeFalecidoJapones {
+        width: 152px;
+        /* Largura total do contêiner */
+        padding: 12px 15px;
+        /* Espaçamento interno */
+        margin: 15px 0;
+        /* Margem entre os campos */
+        border: 2px solid #ccc;
+        /* Borda clara e espessa */
+        border-radius: 8px;
+        /* Cantos arredondados */
+        font-size: 18px;
+        /* Texto maior e mais legível */
+        font-family: 'Arial', sans-serif;
+        /* Tipografia limpa e moderna */
+        background-color: #f9f9f9;
+        /* Fundo claro */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Animação */
+        text-align: -webkit-center;
+    }
+    
+    
+    /* Efeito de foco no campo nomeFalecido */
+    #nomeFalecidoJapones:focus {
+        border-color: #007BFF;
+        /* Azul vibrante ao focar */
+        background-color: #ffffff;
+        /* Fundo branco para destaque */
+        box-shadow: 0 6px 10px rgba(0, 123, 255, 0.2);
+        /* Sombra mais forte */
+        outline: none;
+        /* Remove contorno padrão */
+    }
+    
+    /* Adiciona um placeholder estilizado */
+    #nomeFalecidoJapones:placeholder {
+        color: #888;
+        /* Cor do texto do placeholder */
+        font-style: italic;
+        /* Texto em itálico */
+    }
+    
+    #nomeFamiliaJapones {
+        width: 192px;
+        /* Largura total do contêiner */
+        padding: 12px 15px;
+        /* Espaçamento interno */
+        margin: 15px 0;
+        /* Margem entre os campos */
+        border: 2px solid #ccc;
+        /* Borda clara e espessa */
+        border-radius: 8px;
+        /* Cantos arredondados */
+        font-size: 22px;
+        /* Texto maior e mais legível */
+        font-family: 'Arial', sans-serif;
+        /* Tipografia limpa e moderna */
+        background-color: #f9f9f9;
+        /* Fundo claro */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Animação */
+        text-align: -webkit-center;
+    }
+    
+    /* Efeito de foco no campo nomeFalecido */
+    #nomeFamiliaJapones:focus {
+        border-color: #007BFF;
+        /* Azul vibrante ao focar */
+        background-color: #ffffff;
+        /* Fundo branco para destaque */
+        box-shadow: 0 6px 10px rgba(0, 123, 255, 0.2);
+        /* Sombra mais forte */
+        outline: none;
+        /* Remove contorno padrão */
+    }
+    
+    /* Adiciona um placeholder estilizado */
+    #nomeFamiliaJapones:placeholder {
+        color: #888;
+        /* Cor do texto do placeholder */
+        font-style: italic;
+        /* Texto em itálico */
+    }
+    
+    #nomeFalecidoJapones:hover {
+        box-shadow: 3px 21px 46px #273287;
+    }
+    
+    #nomeFalecido:hover {
+        box-shadow: 3px 21px 46px #273287;
+    }
+    
+    #nomeFamiliaJapones:hover {
+        box-shadow: 3px 21px 46px #273287;
+    }
+    
+    #nomeFamilia:hover {
+        box-shadow: 3px 21px 46px #273287;
     }
     
     select {
@@ -65,6 +251,59 @@
         -moz-appearance: none;
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
         background-size: 16px 16px;
+        width: auto;
+        /* Largura total */
+        padding: 12px 15px;
+        /* Espaçamento interno */
+        margin: 15px 0;
+        /* Margem entre os campos */
+        border: 2px solid #ccc;
+        /* Borda clara */
+        border-radius: 8px;
+        /* Cantos arredondados */
+        font-size: 18px;
+        /* Tamanho do texto */
+        font-family: 'Arial', sans-serif;
+        /* Tipografia moderna */
+        background-color: #f9f9f9;
+        /* Fundo claro */
+        color: #333;
+        /* Cor do texto */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        appearance: none;
+        /* Remove a aparência padrão do navegador */
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        /* Ícone de seta personalizado */
+        background-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        /* Transição suave */
+        cursor: pointer;
+        /* Cursor de ponteiro */
+    }
+    
+    select:focus {
+        border-color: #007BFF;
+        /* Azul vibrante ao focar */
+        background-color: #ffffff;
+        /* Fundo branco */
+        box-shadow: 3px 21px 46px #676ecf;
+        /* Sombra mais forte */
+        outline: none;
+        /* Remove o contorno padrão */
+    }
+    
+    select:hover {
+        box-shadow: 3px 21px 46px #676ecf;
+    }
+    
+    select option[value=""][disabled] {
+        color: #6f9fb6;
+        /* Cor mais clara */
+        font-style: italic;
+        /* Texto em itálico */
     }
     
     .button-group {
@@ -73,6 +312,7 @@
         gap: 10px;
         margin-top: 20px;
     }
+    
     
     #download-pdf,
     #imprimir-texto {
@@ -89,7 +329,7 @@
     #download-pdf:hover,
     #imprimir-texto:hover {
         background-color: #3e8e41;
-    }    
+    }
     
     button#tirar-print {
         background-color: #445ce2;
@@ -100,11 +340,11 @@
         font-size: 18px;
         cursor: pointer;
         transition: background-color 0.3s;
-    }    
+    }
     
     button#tirar-print:hover {
         background-color: #222dc2;
-    }    
+    }
     
     button#ocultar-traducao {
         background-color: #0b7280;
@@ -115,7 +355,7 @@
         font-size: 18px;
         cursor: pointer;
         transition: background-color 0.3s;
-    }    
+    }
     
     button#ocultar-traducao:hover {
         background-color: #04464e;
@@ -153,7 +393,7 @@
         }
     
         div#nomeFalecidoJapones-container {
-            top: 120px !important;
+            top: 117px !important;
             left: 570.844px !important;
             font-size: 25px;
             font-weight: 700;
@@ -334,11 +574,25 @@
     
     #nomeFalecido {
         width: 139px;
+        text-align-last: center;
     }
     
     #nomeFamilia {
-        width: 128px;
+        width: 140px;
     }
+    
+    select#periodo {
+        width: 125px;
+    }
+    
+    select#relacao {
+        width: 143px;
+    }
+
+    input::placeholder {
+        font-size: 14px !important;
+    }
+    
     
     </style>
 
@@ -346,7 +600,7 @@
         <div class="container">
     
             <div id="form-container">
-                <input type="text" id="nomeFalecido" placeholder="Nome do Falecido" />
+                <input type="text" id="nomeFalecido" placeholder="Nome" />
                 <select id="periodonumeral">
                     <option value="">Missa Numeral</option>
                     <option value="7º dia">7º dia</option> 
@@ -406,12 +660,12 @@
                 </select>
                 <input type="text" id="nomeFamilia" placeholder="Nome da Família" />
                 <input type="text" id="nomeFamiliaJapones" placeholder="Nome da Família em Japonês" />
-                <input type="text" id="nomeFalecidoJapones" placeholder="Nome do Falecido em Japonês" />
+                <input type="text" id="nomeFalecidoJapones" placeholder="Nome em Japonês" />
             </div>
     
             <div class="button-group">
                 <button id="tirar-print">Realizar Download</button>
-                <button id="ocultar-traducao">Ocultar Tradução</button>
+                <button id="ocultar-traducao">Ocultar Texto</button>
             </div>
                       
             
