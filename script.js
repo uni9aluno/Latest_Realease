@@ -17,6 +17,7 @@ const previewTexto = document.getElementById('previewTexto');
 const ocultarTraducaoBtn = document.getElementById('ocultar-traducao');
 const textoFixo = document.getElementById('texto-fixo');
 
+
 // Adiciona um ouvinte de evento para o botão "Ocultar Tradução"
 ocultarTraducaoBtn.addEventListener('click', function () {
   // Alterna a visibilidade do texto
@@ -74,54 +75,4 @@ document.fonts.ready.then(() => {
     console.log("Todas as fontes foram carregadas com sucesso.");
 }).catch((error) => {
     console.error("Erro ao carregar fontes:", error);
-});
-
-
-// Função para baixar o PDF
-document.getElementById('download-pdf').addEventListener('click', function () {
-  const { jsPDF } = window.jspdf;
-  const img = new Image();
-  img.src = 'https://i.ibb.co/7XXLP89/Noshigami-Okaeshi-LOGO-NOVO-36-5cm-x-16cm.jpg';
-
-  img.onload = function () {
-    const imgWidthMM = 365; // Largura da imagem em milímetros
-    const imgHeightMM = 160; // Altura da imagem em milímetros
-
-    const doc = new jsPDF('l', 'mm', [imgWidthMM, imgHeightMM]);
-    doc.addImage(img, 'PNG', 0, 0, imgWidthMM, imgHeightMM);
-
-    // Captura o texto fixo
-    const textoFixo = document.getElementById('texto-fixo').textContent.trim();
-    const periodoPreview = document.getElementById('periodoPreview').textContent.trim();
-    const periodoPreviewNumeral = document.getElementById('periodoPreviewNumeral').textContent.trim();
-    const nomeFalecidoPreview = document.getElementById('nomeFalecidoPreview').textContent.trim();
-    const nomeFamiliaPreview = document.getElementById('nomeFamiliaPreview').textContent.trim();
-
-    // Verificar no console se os textos estão sendo capturados
-    console.log('Texto Fixo:', textoFixo);
-    console.log('Periodo Preview:', periodoPreview);
-    console.log('Periodo Numeral Preview:', periodoPreviewNumeral);
-    console.log('Nome Falecido Preview:', nomeFalecidoPreview);
-    console.log('Nome Familia Preview:', nomeFamiliaPreview);
-
-    // Posições fixas para teste
-    const pdfX = 20; // X em milímetros
-    let pdfY = 30; // Y em milímetros, começando abaixo da imagem
-
-    // Configura o tamanho da fonte
-    doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0); // Cor preta
-
-    // Adiciona o texto ao PDF
-    doc.text(textoFixo, pdfX, pdfY);
-    pdfY += 10; // Ajustar a posição Y para o próximo texto
-    doc.text(`${periodoPreview} ${periodoPreviewNumeral}`, pdfX, pdfY);
-    pdfY += 10; // Ajustar a posição Y
-    doc.text(`${nomeFalecidoPreview}`, pdfX, pdfY);
-    pdfY += 10; // Ajustar a posição Y
-    doc.text(`${nomeFamiliaPreview}`, pdfX, pdfY);
-
-    // Salva o PDF com o nome desejado
-    doc.save('Noshigami.pdf');
-  };
 });
