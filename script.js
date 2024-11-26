@@ -69,3 +69,10 @@ document.getElementById('tirar-print').addEventListener('click', function () {
       console.error('Erro ao capturar o print:', error);
     });
 });
+
+
+document.fonts.ready.then(() => {
+    console.log("Todas as fontes foram carregadas com sucesso.");
+}).catch((error) => {
+    console.error("Erro ao carregar fontes:", error);
+});
