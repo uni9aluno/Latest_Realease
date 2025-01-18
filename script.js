@@ -1,3 +1,4 @@
+// Captura de elementos do DOM
 const nomeFalecidoJapones = document.getElementById('nomeFalecidoJapones');
 const periodo = document.getElementById('periodo');
 const periodonumeral = document.getElementById('periodonumeral');
@@ -16,47 +17,71 @@ const relacaoPreview = document.getElementById('relacaoPreview');
 const previewTexto = document.getElementById('previewTexto');
 const ocultarTraducaoBtn = document.getElementById('ocultar-traducao');
 const textoFixo = document.getElementById('texto-fixo');
+const downloadBtn = document.getElementById('tirar-print');
+const downloadDataBtn = document.createElement('button');
+downloadDataBtn.textContent = 'Download Dados';
+downloadDataBtn.id = 'download-dados';
+document.querySelector('.button-group').appendChild(downloadDataBtn);
 
+const downloadWithSignatureBtn = document.createElement('button');
+downloadWithSignatureBtn.textContent = 'Download com Assinatura';
+downloadWithSignatureBtn.id = 'download-com-assinatura';
+document.querySelector('.button-group').appendChild(downloadWithSignatureBtn);
 
-// Adiciona um ouvinte de evento para o botão "Ocultar Tradução"
-ocultarTraducaoBtn.addEventListener('click', function () {
-  // Alterna a visibilidade do texto
-  if (textoFixo.style.display === 'none') {
-    textoFixo.style.display = 'block'; // ou o estilo de exibição original
-  } else {
-    textoFixo.style.display = 'none';
-  }
-});
+// Torna o texto selecionável
+textoFixo.style.userSelect = 'text';
 
+// Atualiza a pré-visualização dinamicamente
 function updatePreview() {
-  // Atualizar cada bloco separadamente
-  periodoPreviewNumeral.textContent = periodonumeral.value;
-  periodoPreview.textContent = periodo.value;
-  nomeFalecidoPreview.textContent = nomeFalecido.value;
-  nomeFalecidoJaponesPreview.textContent = nomeFalecidoJapones.value;
-  nomeFamiliaPreview.textContent = nomeFamilia.value;
-  nomeFamiliaJaponesPreview.textContent = nomeFamiliaJapones.value;
-  relacaoPreview.textContent = relacao.value;
+  // Sanitização de entradas para evitar injeção de scripts
+  const sanitize = (input) => input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  periodoPreviewNumeral.textContent = sanitize(periodonumeral.value);
+  periodoPreview.textContent = sanitize(periodo.value);
+  nomeFalecidoPreview.textContent = sanitize(nomeFalecido.value);
+  nomeFalecidoJaponesPreview.textContent = sanitize(nomeFalecidoJapones.value);
+  nomeFamiliaPreview.textContent = sanitize(nomeFamilia.value);
+  nomeFamiliaJaponesPreview.textContent = sanitize(nomeFamiliaJapones.value);
+  relacaoPreview.textContent = sanitize(relacao.value);
+
+  // Habilita o botão de download se todos os campos essenciais estiverem preenchidos
+  checkFormCompletion();
 }
 
-// Adiciona ouvintes de evento para cada campo
-nomeFalecido.addEventListener('input', updatePreview);
-nomeFalecidoJapones.addEventListener('input', updatePreview);
-periodonumeral.addEventListener('change', updatePreview);
-relacao.addEventListener('change', updatePreview);
-nomeFamilia.addEventListener('input', updatePreview);
-nomeFamiliaJapones.addEventListener('input', updatePreview);
-periodo.addEventListener('change', updatePreview);
+// Adiciona ouvintes de evento para campos
+[nomeFalecido, nomeFalecidoJapones, periodonumeral, periodo, relacao, nomeFamilia, nomeFamiliaJapones].forEach((field) => {
+  field.addEventListener('input', updatePreview);
+  field.addEventListener('change', updatePreview);
+});
 
-// Função para tirar print
-document.getElementById('tirar-print').addEventListener('click', function () {
+// Alterna a visibilidade do texto fixo
+ocultarTraducaoBtn.addEventListener('click', function () {
+  textoFixo.style.display = textoFixo.style.display === 'none' ? 'block' : 'none';
+
+  // Adiciona feedback visual
+  ocultarTraducaoBtn.textContent = textoFixo.style.display === 'none' ? 'Mostrar Texto' : 'Ocultar Texto';
+});
+
+// Função para verificar se o formulário está completo
+function checkFormCompletion() {
+  const isComplete = nomeFalecido.value && periodonumeral.value && nomeFamilia.value;
+  downloadBtn.disabled = !isComplete;
+  downloadWithSignatureBtn.disabled = !isComplete;
+  downloadBtn.title = isComplete ? '' : 'Preencha todos os campos obrigatórios para habilitar o download';
+  downloadWithSignatureBtn.title = isComplete ? '' : 'Preencha todos os campos obrigatórios para habilitar o download';
+}
+
+// Inicializa o estado do botão de download
+checkFormCompletion();
+
+// Função para tirar print e fazer download
+downloadBtn.addEventListener('click', function () {
   const previewElement = document.getElementById('preview');
 
-  
   domtoimage
     .toBlob(previewElement, {
       style: {
-        'background-color': '#ffffff', // Garante um fundo branco na imagem gerada
+        'background-color': '#ffffff', // Fundo branco para a imagem
       },
     })
     .then((blob) => {
@@ -64,8 +89,69 @@ document.getElementById('tirar-print').addEventListener('click', function () {
       link.download = 'preview.png';
       link.href = URL.createObjectURL(blob);
       link.click();
+
+      // Feedback visual ao usuário
+      alert('Download concluído com sucesso!');
     })
     .catch((error) => {
       console.error('Erro ao capturar o print:', error);
+      alert('Ocorreu um erro ao gerar a imagem. Tente novamente.');
+    });
+});
+
+// Função para gerar e baixar os dados preenchidos
+downloadDataBtn.addEventListener('click', function () {
+  const sanitize = (input) => input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const data = `
+    Nome do Falecido: ${sanitize(nomeFalecido.value)}
+    Nome do Falecido (Japonês): ${sanitize(nomeFalecidoJapones.value)}
+    Período (Numeral): ${sanitize(periodonumeral.value)}
+    Período (Japonês): ${sanitize(periodo.value)}
+    Relação: ${sanitize(relacao.value)}
+    Nome da Família: ${sanitize(nomeFamilia.value)}
+    Nome da Família (Japonês): ${sanitize(nomeFamiliaJapones.value)}
+  `;
+
+  const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+  const link = document.createElement('a');
+  link.download = 'dados_formulario.txt';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+
+  alert('Arquivo de dados baixado com sucesso!');
+});
+
+// Função para tirar print com "Assinatura"
+downloadWithSignatureBtn.addEventListener('click', function () {
+  const previewElement = document.getElementById('preview');
+
+  // Temporariamente altera o texto fixo para incluir a assinatura
+  const originalText = textoFixo.innerHTML;
+  textoFixo.innerHTML = '<div style="margin-top: 50px;">Assinatura: _______________</div>';
+
+  domtoimage
+    .toBlob(previewElement, {
+      style: {
+        'background-color': '#ffffff', // Fundo branco para a imagem
+      },
+    })
+    .then((blob) => {
+      const link = document.createElement('a');
+      link.download = 'preview_com_assinatura.png';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+
+      // Restaura o texto original
+      textoFixo.innerHTML = originalText;
+
+      // Feedback visual ao usuário
+      alert('Download com assinatura concluído com sucesso!');
+    })
+    .catch((error) => {
+      console.error('Erro ao capturar o print:', error);
+      alert('Ocorreu um erro ao gerar a imagem com assinatura. Tente novamente.');
+
+      // Restaura o texto original em caso de erro
+      textoFixo.innerHTML = originalText;
     });
 });
